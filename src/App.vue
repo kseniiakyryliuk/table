@@ -1,26 +1,44 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <Form_for_table @create="add"/>
+  <Table_list v-bind:items="items"/>
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Table_list from './components/Table_list.vue'
+import Form_for_table from './components/Form_for_table.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Table_list,
+    Form_for_table
+  },
+  data(){
+    return{
+      items:[],
+    }
+  },
+  methods:
+{
+  add(item){
+  this.items.push(item);
+  localStorage.setItem('items',JSON.stringify(this.items));
+  },
+
+}
+
+
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body{
+    background: linear-gradient( to right, #82efd3 , #cfda89,#6df794);
+    margin: 0 auto;
+}
+#app{
+  display: flex;
+  justify-content: space-around;
 }
 </style>
